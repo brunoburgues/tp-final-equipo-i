@@ -13,5 +13,15 @@ namespace TPfinal_equipo_I
         {
 
         }
+        //comprar
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+        // vaciar carrito
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

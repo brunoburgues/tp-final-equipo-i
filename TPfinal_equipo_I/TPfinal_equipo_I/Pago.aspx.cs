@@ -13,5 +13,10 @@ namespace TPfinal_equipo_I
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

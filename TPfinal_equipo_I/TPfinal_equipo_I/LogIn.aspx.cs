@@ -13,5 +13,10 @@ namespace TPfinal_equipo_I
         {
 
         }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
