@@ -1,0 +1,61 @@
+﻿:root {
+    --color-baige-blanco: #e9e8e6;
+    --color-baige-gris-claro: #c2c1ba;
+    --color-beige: #a8a091;
+    --color-beige-rosa: #c6c1b7;
+    --color-verde-claro: #b2b4a6;
+    --color-verde-intermedio: #98a891;
+    --color-verde-oscuro: #797b70;
+    --color-verde-vibrante: #748775;
+    --color-marron: #786e5f;
+    --color-negro: #2f2d2d;
+}
+
+ul {
+    list-style: none;
+}
+li a{
+    text-decoration: none;
+    color: var(--color-baige-blanco);
+}
+.navbar {
+    background-color: var(--color-verde-vibrante);
+}
+
+.titulo{
+    color: var(--color-negro);
+}
+
+.navbar-brand {
+    color: var(--color-baige-blanco);
+}
+
+footer {
+    background-color: var(--color-marron);
+}
+
+    footer div {
+        width: 100%;
+        gap: 60px;
+    }
+
+.logIn{
+    height: 70vh;
+}
+.logIn  .col{
+    max-width: 400px;
+}
+
+.card .img-container{
+    width: 200px;
+    height: 240px;
+    padding-top: 16px;
+}
+.img-container img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+.default-buscador{
+    width: 100%;
+}

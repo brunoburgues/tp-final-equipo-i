@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Estilos\estilo.css" />
     <Content Include="Carrito.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="Default.aspx" />

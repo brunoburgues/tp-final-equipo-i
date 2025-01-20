@@ -8,6 +8,8 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <meta charset="utf-8" />
+    <script src="https://kit.fontawesome.com/1779cbeca6.js" crossorigin="anonymous"></script>
+    <link href="Assets/Estilos/estilo.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
@@ -18,9 +20,9 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
         <div>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+            <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="Default.aspx">Inicio</a>
+                    <a class="navbar-brand" href="Default.aspx"><i class="fa-solid fa-house"></i></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -40,8 +42,6 @@
                             <a class="nav-link" href="Contacto.aspx">Contacto</a>
 
 
-
-
                         </div>
                     </div>
                 </div>
@@ -51,9 +51,74 @@
                 </asp:ContentPlaceHolder>
             </div>
         </div>
-        <footer class="bg-dark text-white text-center py-3 mt-auto">
-            <p class="form-text text-white mb-1"></p>
-            <h6 class="form-text text-white mb-0">CopyRight© 2025</h6>
+        <footer class="text-white py-3 mt-auto ">
+            <div class="d-flex justify-content-between align-items-start">
+                <div class="d-flex justify-content-center">
+                    <ul>
+                        <li>
+                            <a href="#">¡Contactanos!</a>
+                        </li>
+                        <li>
+                            <a href="#">¡Nuestros Servicios!</a>
+                        </li>
+                        <li>
+                            <a href="#">¡Nuestra ubicación!</a>
+                        </li>
+                        <li>
+                            <a href="#">¡Promociones!</a>
+                        </li>
+                        <li>
+                            <a href="#">¡Nuestra Historia!</a>
+                        </li>
+                        <li>
+                            <a href="#">¡Nuestra Visión!</a>
+                        </li>
+                        <li>
+                            <a href="#">¡Nuestros Valores!</a>
+                        </li>
+                        <li>
+                            <a href="#">¡Nuestro Equipo!</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-start">
+                    <ul>
+                        <li>
+                            <a href="#">Política de Devolución.</a>
+                        </li>
+                        <li>
+                            <a href="#">Política de envío!.</a>
+                        </li>
+                        <li>
+                            <a href="#">Política de garantía.</a>
+                        </li>
+                        <li>
+                            <a href="#">Política de seguridad.</a>
+
+                        </li>
+                        <li>
+                            <a href="#">Política de reembolso.</a>
+                        </li>
+                        <li>
+                            <a href="#">Política de pago.</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <ul class="text-center ">
+                <li>
+                    <a href="#">Política de términos y condiciones.</a>
+                </li>
+                <li>
+                    <a href="#">Política de privacidad.</a>
+                </li>
+                <li>
+                    <a href="#">Política de cookies.</a>
+                </li>
+            </ul>
+
+            <h6 class="form-text  text-center  text-white mb-0">CopyRight© 2025</h6>
         </footer>
 
     </form>
