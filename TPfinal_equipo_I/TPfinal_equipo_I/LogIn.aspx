@@ -13,6 +13,7 @@
             <asp:Label ID="alertaMensaje" class="form-text" runat="server" />
             <div class="text-center">
                 <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" class="btn btn-success mt-4" />
+                <p class="form-text mt-4">Si todavía no tienes una cuenta, puedes crearla <asp:HyperLink runat="server" Text="aquí" ID="linkSignIn"/>.</p>
             </div>
         </div>
     </div>
