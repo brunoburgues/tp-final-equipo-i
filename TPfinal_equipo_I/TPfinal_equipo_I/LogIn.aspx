@@ -8,12 +8,13 @@
             <h2 class="text-center mb-4 titulo">Inicio Sesión</h2>
             <label for="txtUsuario" class="form-label">Usuario</label>
             <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"></asp:TextBox>
-            <label for="txtContraseña" class="form-label mt-2">Contraseña</label>
+            <label for="txtContraseña" class="form-label mt-2"></label>Contraseña
             <asp:TextBox ID="txtContaseña" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
             <asp:Label ID="alertaMensaje" class="form-text" runat="server" />
             <div class="text-center">
                 <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" class="btn btn-success mt-4" />
             </div>
+            <label for="text" class="form-label">Olvido su constraseña haga click aquí.</label>
         </div>
     </div>
 

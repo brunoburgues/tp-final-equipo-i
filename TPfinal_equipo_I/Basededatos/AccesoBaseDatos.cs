@@ -19,7 +19,7 @@ namespace BaseDatos
 
         public AccesoBaseDatos() 
         {
-           conexion = new SqlConnection("server=.\\SQLEXPRESS; database=PROMOS_DB; integrated security=true");
+           conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TP_final_grupo_I; integrated security=true");
             comando = new SqlCommand();
         }
 

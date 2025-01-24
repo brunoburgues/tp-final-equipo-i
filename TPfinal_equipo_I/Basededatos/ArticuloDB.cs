@@ -27,14 +27,14 @@ namespace BaseDatos
                     auxA.Codigo = (string)db.Reader["Codigo"];
                     auxA.Nombre = (string)db.Reader["Nombre"];
                     auxA.Descripcion = (string)db.Reader["Descripcion"];
-                    auxA.Perfil = new Perfil();
-                    auxA.Perfil.Id = (int)db.Reader["IdMarca"];
+                    auxA.Marca = new Marca();
+                    auxA.Marca.Id = (int)db.Reader["IdMarca"];
                     if (db.Reader["Marca"] != DBNull.Value) 
                     { 
-                        auxA.Perfil.Nombre = (string)db.Reader["Marca"];
+                        auxA.Marca.Nombre = (string)db.Reader["Marca"];
                     }else
                     {
-                        auxA.Perfil.Nombre = "Sin asignar";
+                        auxA.Marca.Nombre = "Sin asignar";
                     }
                     auxA.Categoria = new Categoria();
                     auxA.Categoria.Id = (int)db.Reader["IdCategoria"];
@@ -81,15 +81,15 @@ namespace BaseDatos
                     auxA.Codigo = (string)db.Reader["Codigo"];
                     auxA.Nombre = (string)db.Reader["Nombre"];
                     auxA.Descripcion = (string)db.Reader["Descripcion"];
-                    auxA.Perfil = new Perfil();
-                    auxA.Perfil.Id = (int)db.Reader["IdMarca"];
+                    auxA.Marca = new Marca();
+                    auxA.Marca.Id = (int)db.Reader["IdMarca"];
                     if (db.Reader["Marca"] != DBNull.Value)
                     {
-                        auxA.Perfil.Nombre = (string)db.Reader["Marca"];
+                        auxA.Marca.Nombre = (string)db.Reader["Marca"];
                     }
                     else
                     {
-                        auxA.Perfil.Nombre = "Sin asignar";
+                        auxA.Marca.Nombre = "Sin asignar";
                     }
                     auxA.Categoria = new Categoria();
                     auxA.Categoria.Id = (int)db.Reader["IdCategoria"];
@@ -125,7 +125,7 @@ public void agregar(Articulo nuevo)
             AccesoBaseDatos datos = new AccesoBaseDatos();
             try
             {
-                datos.SetConsulta("Insert into ARTICULOS values ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', " + nuevo.Perfil.Id + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
+                datos.SetConsulta("Insert into ARTICULOS values ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', " + nuevo.Marca.Id + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
                 datos.Lectura();
             }
 
@@ -177,7 +177,7 @@ public void agregar(Articulo nuevo)
                         Codigo = (string)datos.Reader["Codigo"],
                         Nombre = (string)datos.Reader["Nombre"],
                         Descripcion = (string)datos.Reader["Descripcion"],
-                        Perfil = new Perfil { Id = (int)datos.Reader["IdMarca"] },
+                        Marca = new Marca { Id = (int)datos.Reader["IdMarca"] },
                         Categoria = new Categoria { Id = (int)datos.Reader["IdCategoria"] },
                         Precio = (decimal)datos.Reader["Precio"]
                     };
@@ -203,7 +203,7 @@ public void agregar(Articulo nuevo)
                 datos.setParametro("@codigo", articulo.Codigo);
                 datos.setParametro("@nombre", articulo.Nombre);
                 datos.setParametro("@descripcion", articulo.Descripcion);
-                datos.setParametro("@idMarca", articulo.Perfil.Id);
+                datos.setParametro("@idMarca", articulo.Marca.Id);
                 datos.setParametro("@idCategoria", articulo.Categoria.Id);
                 datos.setParametro("@precio", articulo.Precio);
                 datos.setParametro("@id", articulo.Id);

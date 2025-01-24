@@ -9,9 +9,9 @@ namespace BaseDatos
 {
     public class PerfilDB
     {
-        public List<Perfil> listarMarcas()
+        public List<Marca> listarMarcas()
         {
-            List<Perfil> lista = new List<Perfil>();
+            List<Marca> lista = new List<Marca>();
             AccesoBaseDatos datos = new AccesoBaseDatos();
             try
             {
@@ -19,10 +19,10 @@ namespace BaseDatos
                 datos.Lectura();
                 while (datos.Reader.Read())
                 {
-                    Perfil Perfil = new Perfil();
-                    Perfil.Id = (int)datos.Reader["Id"];
-                    Perfil.Nombre = (string)datos.Reader["Descripcion"];
-                    lista.Add(Perfil);
+                    Marca marca = new Marca();
+                    marca.Id = (int)datos.Reader["Id"];
+                    marca.Nombre = (string)datos.Reader["Descripcion"];
+                    lista.Add(marca);
                 }
                 return lista;
             }
@@ -53,7 +53,7 @@ namespace BaseDatos
                 datos.CloseConexion();
             }
         }
-        public void editar(Perfil marca, string nombre)
+        public void editar(Marca marca, string nombre)
         {
             AccesoBaseDatos accesoBaseDatos = new AccesoBaseDatos();
             try
