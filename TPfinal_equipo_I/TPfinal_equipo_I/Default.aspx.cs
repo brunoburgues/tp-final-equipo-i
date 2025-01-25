@@ -19,6 +19,10 @@ namespace TPfinal_equipo_I
                 List<Articulo> lista = articuloDB.ListarArticulos();
                 idRepeater.DataSource = lista; 
                 idRepeater.DataBind();
+                repeaterMasVendidos.DataSource = lista;
+                repeaterMasVendidos.DataBind();
+                repeaterProductos.DataSource = lista;
+                repeaterProductos.DataBind();
             }
         }
 
