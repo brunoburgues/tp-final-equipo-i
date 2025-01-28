@@ -23,7 +23,7 @@ namespace BaseDatos
                 {
                     Categoria c = new Categoria();
                     c.Id = (int)datos.Reader["Id"];
-                    c.Nombre = (string)datos.Reader["Descripcion"];
+                    c.Descripcion = (string)datos.Reader["Descripcion"];
                     listaCategorias.Add(c);
                 }
                 return listaCategorias;
