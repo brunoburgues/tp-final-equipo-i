@@ -35,6 +35,7 @@ CREATE TABLE [dbo].[ARTICULOS](
 	[IdMarca] [int] NULL,
 	[IdCategoria] [int] NULL,
 	[Precio] [money] NULL,
+	[EnPromocion] bit NOT NULL DEFAULT 0,
  CONSTRAINT [PK_ARTICULOS] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -74,7 +75,7 @@ GO
 ALTER TABLE [dbo].[IMAGENES] CHECK CONSTRAINT [FK_IMAGENES_ARTICULOS]
 GO
 
-CREATE TABLE [dbo].[Clientes](
+CREATE TABLE [dbo].[CLIENTES](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Documento] [varchar](50) NOT NULL,
 	[Nombre] [varchar](50) NOT NULL,
@@ -89,10 +90,20 @@ CREATE TABLE [dbo].[Clientes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+CREATE TABLE [dbo].[ESTADOS_CARRITO] (
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [Estado] VARCHAR(20) NOT NULL UNIQUE
+);
+GO
+
 CREATE TABLE [dbo].[CARRITO](
     [Id] [int] IDENTITY(1,1) NOT NULL,
     [IdCliente] [int] NOT NULL,
     [FechaCreacion] [datetime] NOT NULL,
+	[CostoTotal] [money] NOT NULL DEFAULT 0,
+	[IdEstado] [int] NOT NULL DEFAULT 2,
+	[CostoEnvio] [money] NULL,
  CONSTRAINT [PK_CARRITO] PRIMARY KEY CLUSTERED 
 (
     [Id] ASC
@@ -102,6 +113,11 @@ GO
 ALTER TABLE [dbo].[CARRITO] ADD CONSTRAINT [FK_CARRITO_CLIENTES] FOREIGN KEY([IdCliente])
 REFERENCES [dbo].[Clientes] ([Id])
 GO
+ALTER TABLE [dbo].[CARRITO] 
+ADD CONSTRAINT [FK_CARRITO_ESTADO] FOREIGN KEY([IdEstado])
+REFERENCES [dbo].[ESTADOS_CARRITO] ([Id]);
+GO
+
 CREATE TABLE [dbo].[CARRITO_PRODUCTOS](
     [Id] [int] IDENTITY(1,1) NOT NULL,
     [IdCarrito] [int] NOT NULL,
@@ -122,20 +138,11 @@ ALTER TABLE [dbo].[CARRITO_PRODUCTOS] ADD CONSTRAINT [FK_CARRITO_PRODUCTOS_ARTIC
 REFERENCES [dbo].[ARTICULOS] ([Id])
 GO
 
-CREATE TABLE [dbo].[METODOS_PAGO] (
-    [Id] [int] IDENTITY(1,1) NOT NULL,
-	[Nombre] [varchar](50) NULL,
-    [Descripcion] [varchar](80) NULL,
-    CONSTRAINT [PK_METODOS_PAGO] PRIMARY KEY CLUSTERED ([Id] ASC)
-) ON [PRIMARY];
-GO
-
 CREATE TABLE [dbo].[PAGOS](
     [Id] [int] IDENTITY(1,1) NOT NULL,
     [IdCarrito] [int] NOT NULL,
     [FechaPago] [datetime] NOT NULL,
     [MontoTotal] [money] NOT NULL,
-    [IdMetodoPago] [int] NOT NULL,
 CONSTRAINT [PK_PAGOS] PRIMARY KEY CLUSTERED 
 (
     [Id] ASC
@@ -147,17 +154,11 @@ REFERENCES [dbo].[CARRITO] ([Id])
 GO
 ALTER TABLE [dbo].[PAGOS] CHECK CONSTRAINT [FK_PAGOS_CARRITO]
 GO
-ALTER TABLE [dbo].[PAGOS]  WITH CHECK ADD CONSTRAINT [FK_PAGOS_METODOS_PAGO]
-FOREIGN KEY([IdMetodoPago])
-REFERENCES [dbo].[METODOS_PAGO]([Id]);
-GO
-ALTER TABLE [dbo].[PAGOS] CHECK CONSTRAINT [FK_PAGOS_METODOS_PAGO];
-GO
 insert into MARCAS values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Huawei'), ('Motorola')
 insert into CATEGORIAS values ('Mochilas'),('Periféricos'), ('Accesorios')
-insert into ARTICULOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 49999),
-('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 64999),
-('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 185000)
+insert into ARTICULOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 49999, 0),
+('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 64999, 0),
+('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 185000, 0)
 
 insert into imagenes values
 (1,'https://http2.mlstatic.com/D_NQ_NP_703368-MLU76300898146_052024-O.webp'),
@@ -172,11 +173,7 @@ insert into imagenes values
 
 
 insert into clientes values ('32333222', 'Doug', 'Narinas', 'doug@narinas.com','avenida 123', 'chuletas city', 1234)
-INSERT INTO [dbo].[METODOS_PAGO] ([Nombre], [Descripcion])
-VALUES 
-('Tarjeta de Crédito', 'Mastercard'),
-('Tarjeta de Crédito', 'Visa'),
-('Tarjeta de Debito', 'Santander'),
-('Tarjeta de Debito', 'Galicia'),
-('Transferencia Plataforma Digital', 'Mercado Pago'),
-('Efectivo', 'Pago mediante dinero en efectivo'); 
+
+INSERT INTO [dbo].[ESTADOS_CARRITO] ([Estado]) VALUES 
+('Cancelado'), ('Pendiente'), ('Abonado'), 
+('En preparación'), ('En camino'), ('Entregado'), ('Devuelto');
