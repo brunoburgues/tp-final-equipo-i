@@ -57,7 +57,7 @@ namespace TPfinal_equipo_I
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox listBoxCategorias;
+        protected global::System.Web.UI.WebControls.DropDownList listBoxCategorias;
 
         /// <summary>
         /// Control txtImagen.
