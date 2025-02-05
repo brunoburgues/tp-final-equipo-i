@@ -33,7 +33,20 @@ namespace TPfinal_equipo_I
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
+<<<<<<< HEAD
         /// txtPrecio control.
+=======
+        /// Control txtPrecio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPrecio;
+
+        /// <summary>
+        /// Control txtStock.
+>>>>>>> c7750815f6e4d4274b8f964e2b9adb1e0b4c43c9
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
@@ -57,7 +70,7 @@ namespace TPfinal_equipo_I
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox listBoxCategorias;
+        protected global::System.Web.UI.WebControls.DropDownList listBoxCategorias;
 
         /// <summary>
         /// txtImagen control.

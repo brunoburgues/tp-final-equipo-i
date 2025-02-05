@@ -1,3 +1,5 @@
+ï»¿USE [Ventas_Web_DB]
+GO
 use master 
 go
 create database Ventas_Web_DB
@@ -155,10 +157,10 @@ GO
 ALTER TABLE [dbo].[PAGOS] CHECK CONSTRAINT [FK_PAGOS_CARRITO]
 GO
 insert into MARCAS values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Huawei'), ('Motorola')
-insert into CATEGORIAS values ('Mochilas'),('Periféricos'), ('Accesorios')
-insert into ARTICULOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 49999, 0),
-('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 64999, 0),
-('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 185000, 0)
+insert into CATEGORIAS values ('Mochilas'),('Perifï¿½ricos'), ('Accesorios')
+insert into ARTICULOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseï¿½o elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 49999, 0),
+('P03', 'Mouse Gamer Hero G502', 'Sumï¿½rgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 64999, 0),
+('P08', 'Teclado Mecï¿½nico 75% Rk M75', 'Este teclado cuenta con un diseï¿½o compacto con 81 teclas, por lo que es fï¿½cil de transportar y usar en cualquier lugar.', 2, 3, 185000, 0)
 
 insert into imagenes values
 (1,'https://http2.mlstatic.com/D_NQ_NP_703368-MLU76300898146_052024-O.webp'),
@@ -176,4 +178,23 @@ insert into clientes values ('32333222', 'Doug', 'Narinas', 'doug@narinas.com','
 
 INSERT INTO [dbo].[ESTADOS_CARRITO] ([Estado]) VALUES 
 ('Cancelado'), ('Pendiente'), ('Abonado'), 
-('En preparación'), ('En camino'), ('Entregado'), ('Devuelto');
+('En preparaciï¿½n'), ('En camino'), ('Entregado'), ('Devuelto');
+/****** Object:  Table [dbo].[Usuarios]    Script Date: 30/1/2025 19:22:07 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Usuarios](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Usuario] [varchar](50) NULL,
+	[Pass] [varchar](50) NULL,
+	[TipoUser] [int] NULL,
+ CONSTRAINT [PK_Usuarios] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
