@@ -10,8 +10,8 @@
     <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control"></asp:TextBox>
     <label for="txtNombre" class="form-label">Nombre</label>
     <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
-    <label for="txtNombre" class="form-label">Precio</label>
-    <asp:TextBox ID="txtPrecio" runat="server"textmode="Month" CssClass="form-control"></asp:TextBox>
+    <label for="txtPrecio" class="form-label">Precio</label>
+    <asp:TextBox ID="txtPrecio" runat="server" textmode="Month" CssClass="form-control"></asp:TextBox>
     <label for="txtNombre" class="form-label">Stock</label>
     <asp:TextBox ID="txtStock" runat="server" CssClass="form-control"></asp:TextBox>
     <label for="txtNombre" class="form-label">Categoria</label>
@@ -19,7 +19,7 @@
     <label for="txtNombre" class="form-label">Imagen</label>
     <asp:TextBox ID="txtImagen" runat="server" CssClass="form-control"></asp:TextBox>
     <label for="txtNombre" class="form-label">Descripcion</label>
-    <asp:TextBox ID="txtDescripcion"textmode="MultiLine" runat="server" CssClass="form-control"></asp:TextBox>
+    <asp:TextBox ID="txtDescripcion" textmode="MultiLine" runat="server" CssClass="form-control"></asp:TextBox>
     <asp:Label ID="alertaMensaje" class="form-text" runat="server" />
             </div>
         <div class="mb-3">

@@ -40,11 +40,11 @@ namespace BaseDatos
                     auxA.Categoria.Id = (int)db.Reader["IdCategoria"];
                     if (db.Reader["Categoria"] != DBNull.Value)
                     {
-                        auxA.Categoria.Nombre = (string)db.Reader["Categoria"];
+                        auxA.Categoria.Descripcion = (string)db.Reader["Categoria"];
                     }
                     else
                     {
-                        auxA.Categoria.Nombre = "Sin asignar";
+                        auxA.Categoria.Descripcion = "Sin asignar";
                     }
                     auxA.Precio = (decimal)db.Reader["Precio"];
                     ImagenDB listaImagen = new ImagenDB();
@@ -95,11 +95,11 @@ namespace BaseDatos
                     auxA.Categoria.Id = (int)db.Reader["IdCategoria"];
                     if (db.Reader["Categoria"] != DBNull.Value)
                     {
-                        auxA.Categoria.Nombre = (string)db.Reader["Categoria"];
+                        auxA.Categoria.Descripcion = (string)db.Reader["Categoria"];
                     }
                     else
                     {
-                        auxA.Categoria.Nombre = "Sin asignar";
+                        auxA.Categoria.Descripcion = "Sin asignar";
                     }
                     auxA.Precio = (decimal)db.Reader["Precio"];
                     ImagenDB listaImagen = new ImagenDB();

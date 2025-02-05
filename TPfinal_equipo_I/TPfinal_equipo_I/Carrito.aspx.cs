@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BaseDatos;
+using Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,15 @@ namespace TPfinal_equipo_I
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                ArticuloDB articuloDB = new ArticuloDB();
+                List<Articulo> lista = articuloDB.ListarArticulos();
+                repArticulos.DataSource = lista;
+                repArticulos.DataBind();
+                //dgvCarrito.DataSource = lista;
+                //dgvCarrito.DataBind();
+            }
         }
         //comprar
         protected void Button1_Click(object sender, EventArgs e)
