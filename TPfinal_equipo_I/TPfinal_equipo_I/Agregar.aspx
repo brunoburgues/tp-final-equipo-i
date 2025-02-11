@@ -27,9 +27,9 @@
         <label for="txtImagenUrl" class="form-label">Url Imagen</label>
         <asp:TextBox ID="txtImagenUrl" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged" ></asp:TextBox>
     </div>
-    <asp:Image ImageUrl="https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png" src="<%=urlImagen %>" ID="imgImagen" runat="server" CssClass="img-fluid" Width="60%" />
+    <asp:Image  ID="imgImagen" runat="server" CssClass="img-fluid" Width="60%" />
 </ContentTemplate>
-
+               
         </asp:UpdatePanel>
             <asp:Label ID="alertaMensaje" class="form-text" runat="server" />
             </div>

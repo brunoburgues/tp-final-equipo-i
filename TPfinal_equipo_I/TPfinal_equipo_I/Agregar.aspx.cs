@@ -26,10 +26,32 @@ namespace TPfinal_equipo_I
                     listBoxCategorias.DataTextField = "Descripcion"; // Campo visible en el DropDownList
                     listBoxCategorias.DataValueField = "Id";    // Campo que actúa como el valor
                     listBoxCategorias.DataBind();
+                    string urlImagen = "https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png";
+                    imgImagen.ImageUrl = urlImagen;
+
                 }
             }catch(Exception ex )
             { Session.Add("Error", ex); }
+            
+        if (Request.QueryString["id"] != null)
+        {
+            try
+            {
+                int id = int.Parse(Request.QueryString["id"]);
+                    List<Articulo> articulos = (List<Articulo>)Session["Articulos"];
+                    Articulo articulo = articulos.Find(x => x.Id ==id);
+
+                txtNombre.Text = articulo.Nombre;
+                txtDescripcion.Text = articulo.Descripcion;
+                txtPrecio.Text = articulo.Precio.ToString();
+                listBoxCategorias.SelectedValue = articulo.Categoria.Id.ToString();
+                imgImagen.ImageUrl = articulo.Imagenes[0].Url;
             }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+            }
+        }}
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             try

@@ -81,16 +81,8 @@ namespace BaseDatos
                     auxA.Codigo = (string)db.Reader["Codigo"];
                     auxA.Nombre = (string)db.Reader["Nombre"];
                     auxA.Descripcion = (string)db.Reader["Descripcion"];
-                    auxA.Marca = new Marca();
-                    auxA.Marca.Id = (int)db.Reader["IdMarca"];
-                    if (db.Reader["Marca"] != DBNull.Value)
-                    {
-                        auxA.Marca.Nombre = (string)db.Reader["Marca"];
-                    }
-                    else
-                    {
-                        auxA.Marca.Nombre = "Sin asignar";
-                    }
+                   
+                    
                     auxA.Categoria = new Categoria();
                     auxA.Categoria.Id = (int)db.Reader["IdCategoria"];
                     if (db.Reader["Categoria"] != DBNull.Value)
