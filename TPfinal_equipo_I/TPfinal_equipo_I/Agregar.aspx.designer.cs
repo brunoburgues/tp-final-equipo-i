@@ -60,15 +60,6 @@ namespace TPfinal_equipo_I
         protected global::System.Web.UI.WebControls.DropDownList listBoxCategorias;
 
         /// <summary>
-        /// txtImagen control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtImagen;
-
-        /// <summary>
         /// txtDescripcion control.
         /// </summary>
         /// <remarks>
@@ -76,6 +67,33 @@ namespace TPfinal_equipo_I
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+
+        /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
+        /// txtImagenUrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtImagenUrl;
+
+        /// <summary>
+        /// imgImagen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgImagen;
 
         /// <summary>
         /// alertaMensaje control.

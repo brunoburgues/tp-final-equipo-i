@@ -125,7 +125,7 @@ public void agregar(Articulo nuevo)
             AccesoBaseDatos datos = new AccesoBaseDatos();
             try
             {
-                datos.SetConsulta("Insert into ARTICULOS values ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', " + nuevo.Marca.Id + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
+                datos.SetConsulta("Insert into ARTICULOS values ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
                 datos.Lectura();
             }
 
