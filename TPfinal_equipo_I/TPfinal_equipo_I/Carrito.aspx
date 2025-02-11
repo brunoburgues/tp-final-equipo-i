@@ -10,27 +10,32 @@
             <h2 class="mb-4">
                 <i class="bi bi-arrow-left"></i>Carrito de Compras
             </h2>
-            <asp:Repeater runat="server" ID="repArticulos">
-                <ItemTemplate>
-                    <div class="cart-item containerArticulo d-flex align-items-center mb-3">
-                        <div class="carrito-img-container">
-                            <img src="<%# Eval("Imagenes[0].Url") %>" alt="<%# Eval("Nombre") %>" class="product-img">
-                        </div>
-                        <div class="cart-info">
-                            <h5><%# Eval("Nombre") %></h5>
-                            <p class="price">$<%# Eval("Precio") %></p>
-                            <div class="quantity">
-                                <button class="btn btn-outline-dark">−</button>
-                                <span class="qty">2</span>
-                                <button class="btn btn-outline-dark">+</button>
+            <asp:UpdatePanel runat="server" ID="panelArticulos">
+                <ContentTemplate>
+                    <asp:Repeater runat="server" ID="repArticulos" OnItemCommand="repArticulos_ItemCommand">
+                        <ItemTemplate>
+                            <div class="cart-item containerArticulo d-flex align-items-center mb-3">
+                                <div class="carrito-img-container">
+                                    <img src="<%# Eval("ImagenUrl") %>" alt="<%# Eval("Nombre") %>" class="product-img">
+                                </div>
+                                <div class="cart-info">
+                                    <h5><%# Eval("Nombre") %></h5>
+                                    <p class="price">$<%# Eval("Precio") %></p>
+                                    <div class="quantity">
+                                        <asp:Button ID="btnMenos" Text="-" runat="server" CssClass="btn btn-outline-dark" CommandName="Menos" CommandArgument='<%# Eval("IdArticulo") %>' />
+                                        <asp:Label ID="lblCantidad" Text='<%# Eval("Cantidad") %>' runat="server" CssClass="qty" />
+                                        <asp:Button ID="btnMas" Text="+" runat="server" CssClass="btn btn-outline-dark" CommandName="Mas" CommandArgument='<%# Eval("IdArticulo") %>' />
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-link text-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
                             </div>
-                        </div>
-                        <button class="btn btn-link text-danger">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <div class="text-end">
                 <h2 class="mt-2 mb-2">Total</h2>
                 <asp:Label ID="montoTotal" runat="server" Text="A definir" CssClass="d-block mb-4"></asp:Label>

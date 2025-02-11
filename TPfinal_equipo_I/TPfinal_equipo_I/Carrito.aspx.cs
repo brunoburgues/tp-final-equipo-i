@@ -1,4 +1,4 @@
-﻿using BaseDatos;
+﻿using Basededatos;
 using Dominio;
 using System;
 using System.Collections.Generic;
@@ -15,12 +15,11 @@ namespace TPfinal_equipo_I
         {
             if (!IsPostBack)
             {
-                ArticuloDB articuloDB = new ArticuloDB();
-                List<Articulo> lista = articuloDB.ListarArticulos();
-                repArticulos.DataSource = lista;
+                int idCarrito = 1;
+                CarritoDB carritoDB = new CarritoDB();
+                List<Carrito> carrito = carritoDB.ListarArticulos(idCarrito);
+                repArticulos.DataSource = carrito;
                 repArticulos.DataBind();
-                //dgvCarrito.DataSource = lista;
-                //dgvCarrito.DataBind();
             }
         }
         //comprar
@@ -32,6 +31,45 @@ namespace TPfinal_equipo_I
         protected void Button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnMenos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnMas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void repArticulos_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            CarritoDB carritoDB = new CarritoDB();
+            int idArticulo = Convert.ToInt32(e.CommandArgument);
+            int idCarrito = 1;
+            Label lblCantidad = (Label)e.Item.FindControl("lblCantidad");
+
+            if (lblCantidad != null)
+            {
+                int cantidad = int.Parse(lblCantidad.Text);
+
+                if (e.CommandName == "Menos")
+                {
+                    if (cantidad > 0){
+                        cantidad--;
+                    }
+                }
+                else if (e.CommandName == "Mas")
+                {
+                    cantidad++;
+                }
+                lblCantidad.Text = Convert.ToString(cantidad);
+                //carritoDB = carritoDB.ActualizarCantidad(idCarrito, idArticulo, cantidad);
+            }
+            //List<Carrito> carrito = carritoDB.ListarArticulos(idCarrito);
+            //repArticulos.DataSource = carrito;
+            //.DataBind();
         }
     }
 }

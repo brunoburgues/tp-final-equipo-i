@@ -178,7 +178,7 @@ insert into clientes values ('32333222', 'Doug', 'Narinas', 'doug@narinas.com','
 
 INSERT INTO [dbo].[ESTADOS_CARRITO] ([Estado]) VALUES 
 ('Cancelado'), ('Pendiente'), ('Abonado'), 
-('En preparaci�n'), ('En camino'), ('Entregado'), ('Devuelto');
+('En preparación'), ('En camino'), ('Entregado'), ('Devuelto');
 /****** Object:  Table [dbo].[Usuarios]    Script Date: 30/1/2025 19:22:07 ******/
 SET ANSI_NULLS ON
 GO
