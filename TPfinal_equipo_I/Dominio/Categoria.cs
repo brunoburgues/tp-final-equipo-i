@@ -18,9 +18,7 @@ namespace Dominio
             return Descripcion;
         }
 
-        public static explicit operator Categoria(System.Web.UI.WebControls.ListItem v)
-        {
-            throw new NotImplementedException();
-        }
+        
+        
     }
 }
