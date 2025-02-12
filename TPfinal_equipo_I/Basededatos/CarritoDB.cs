@@ -65,13 +65,31 @@ namespace Basededatos
             finally { datos.CloseConexion(); }
         }
 
-        public void eliminar(int id)
+        public void eliminarArticulo(int id)
         {
             AccesoBaseDatos datos = new AccesoBaseDatos();
             try
             {
                 datos.SetConsulta("delete from CARRITO_PRODUCTOS where id = @id");
                 datos.setearparametros("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CloseConexion();
+            }
+        }
+        public void eliminarCarrito(int idCarrito)
+        {
+            AccesoBaseDatos datos = new AccesoBaseDatos();
+            try
+            {
+                datos.SetConsulta("delete from CARRITO where id = @id");
+                datos.setearparametros("@id", idCarrito);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

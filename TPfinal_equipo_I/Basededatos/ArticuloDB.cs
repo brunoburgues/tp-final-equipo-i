@@ -126,7 +126,7 @@ public void agregar(Articulo nuevo)
             try
             {
                 datos.SetConsulta("Insert into ARTICULOS values ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
-                datos.Lectura();
+                datos.ejecutarAccion();
             }
 
             catch (Exception ex)

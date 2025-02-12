@@ -41,7 +41,7 @@
             </div>
 
             <div class="text-center mb-4">
-                <asp:Button ID="btnVaciar" runat="server" Text='Vaciar carrito' CssClass="btn btn-danger btn-lg w-60  me-2" OnClick="Button2_Click" />
+                <asp:Button ID="btnVaciar" runat="server" Text='Vaciar carrito' CssClass="btn btn-danger btn-lg w-60  me-2" OnClick="btnVaciar_Click" />
                 <asp:Button ID="btnComprar" runat="server" Text='Comprar' CssClass=" btn btn-success btn-lg w-60 ms-2" OnClick="Button1_Click" />
             </div>
         </div>

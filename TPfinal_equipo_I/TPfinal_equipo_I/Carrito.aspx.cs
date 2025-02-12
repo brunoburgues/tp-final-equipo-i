@@ -18,6 +18,15 @@ namespace TPfinal_equipo_I
             repArticulos.DataSource = carrito;
             repArticulos.DataBind();
         }
+        private decimal calcularMontoTotal(List<Carrito> carrito)
+        {
+            decimal montoTotal = 0;
+            foreach (Carrito c in carrito)
+            {
+                montoTotal += c.Precio * c.Cantidad;
+            }
+            return montoTotal;
+        }
         //eventos
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,17 +36,15 @@ namespace TPfinal_equipo_I
                 int idCarrito = 1;
                 CarritoDB carritoDB = new CarritoDB();
                 List<Carrito> carrito = carritoDB.ListarArticulos(idCarrito);
+                montoTotal.Text = $"{calcularMontoTotal(carrito)}";
+                
+
                 repArticulos.DataSource = carrito;
                 repArticulos.DataBind();
             }
         }
         //comprar
         protected void Button1_Click(object sender, EventArgs e)
-        {
-
-        }
-        // vaciar carrito
-        protected void Button2_Click(object sender, EventArgs e)
         {
 
         }
@@ -62,7 +69,7 @@ namespace TPfinal_equipo_I
                 int id = Convert.ToInt32(listaArgumentos[0]);
                 int idC = Convert.ToInt32(listaArgumentos[1]);
 
-                carritoDB.eliminar(id);
+                carritoDB.eliminarArticulo(id);
                 cargarArticulos(carritoDB, idC);
                 return;
             }
@@ -93,6 +100,13 @@ namespace TPfinal_equipo_I
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+        }
+
+        protected void btnVaciar_Click(object sender, EventArgs e)
+        {
+            int idCarrito = 1;
+            CarritoDB carritoDB = new CarritoDB();
+            carritoDB.eliminarCarrito(idCarrito);
         }
     }
 }
