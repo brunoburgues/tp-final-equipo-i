@@ -45,5 +45,43 @@ namespace Basededatos
                 db.CloseConexion();
             }
         }
+        public void actualizarCantidad(int idCarrito, int idArticulo, int cantidad)
+        {
+            AccesoBaseDatos datos = new AccesoBaseDatos();
+            try
+            {
+                datos.SetConsulta("update CARRITO_PRODUCTOS set Cantidad = @cantidad where IdCarrito = @idCarrito AND IdArticulo = @idArticulo ");
+                datos.setParametro("@idCarrito", idCarrito);
+                datos.setParametro("@idArticulo", idArticulo);
+                datos.setParametro("@cantidad", cantidad);
+                
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally { datos.CloseConexion(); }
+        }
+
+        public void eliminar(int id)
+        {
+            AccesoBaseDatos datos = new AccesoBaseDatos();
+            try
+            {
+                datos.SetConsulta("delete from CARRITO_PRODUCTOS where id = @id");
+                datos.setearparametros("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CloseConexion();
+            }
+        }
     }
 }

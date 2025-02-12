@@ -11,10 +11,19 @@ namespace TPfinal_equipo_I
 {
     public partial class Compra : System.Web.UI.Page
     {
+        //métodos
+        private void cargarArticulos(CarritoDB carritoDB, int idCarrito)
+        {
+            List<Carrito> carrito = carritoDB.ListarArticulos(idCarrito);
+            repArticulos.DataSource = carrito;
+            repArticulos.DataBind();
+        }
+        //eventos
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+
                 int idCarrito = 1;
                 CarritoDB carritoDB = new CarritoDB();
                 List<Carrito> carrito = carritoDB.ListarArticulos(idCarrito);
@@ -46,30 +55,44 @@ namespace TPfinal_equipo_I
         protected void repArticulos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             CarritoDB carritoDB = new CarritoDB();
-            int idArticulo = Convert.ToInt32(e.CommandArgument);
-            int idCarrito = 1;
+
+            if (e.CommandName == "Eliminar")
+            {
+                string[] listaArgumentos = e.CommandArgument.ToString().Split(',');
+                int id = Convert.ToInt32(listaArgumentos[0]);
+                int idC = Convert.ToInt32(listaArgumentos[1]);
+
+                carritoDB.eliminar(id);
+                cargarArticulos(carritoDB, idC);
+                return;
+            }
+
+            string[] argumentos = e.CommandArgument.ToString().Split(',');
+            int idArticulo = Convert.ToInt32(argumentos[0]);
+            int idCarrito = Convert.ToInt32(argumentos[1]);
+
             Label lblCantidad = (Label)e.Item.FindControl("lblCantidad");
 
             if (lblCantidad != null)
             {
                 int cantidad = int.Parse(lblCantidad.Text);
 
-                if (e.CommandName == "Menos")
+                if (e.CommandName == "Menos" && cantidad > 1)
                 {
-                    if (cantidad > 0){
-                        cantidad--;
-                    }
+                    cantidad--;
                 }
                 else if (e.CommandName == "Mas")
                 {
                     cantidad++;
                 }
                 lblCantidad.Text = Convert.ToString(cantidad);
-                //carritoDB = carritoDB.ActualizarCantidad(idCarrito, idArticulo, cantidad);
+                carritoDB.actualizarCantidad(idCarrito, idArticulo, cantidad);
             }
-            //List<Carrito> carrito = carritoDB.ListarArticulos(idCarrito);
-            //repArticulos.DataSource = carrito;
-            //.DataBind();
+            cargarArticulos(carritoDB, idCarrito);
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
         }
     }
 }

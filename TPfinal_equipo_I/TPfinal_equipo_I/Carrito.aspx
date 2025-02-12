@@ -22,15 +22,14 @@
                                     <h5><%# Eval("Nombre") %></h5>
                                     <p class="price">$<%# Eval("Precio") %></p>
                                     <div class="quantity">
-                                        <asp:Button ID="btnMenos" Text="-" runat="server" CssClass="btn btn-outline-dark" CommandName="Menos" CommandArgument='<%# Eval("IdArticulo") %>' />
+                                        <asp:Button ID="btnMenos" Text="-" runat="server" CssClass="btn btn-outline-dark" CommandName="Menos" CommandArgument='<%# Eval("IdArticulo") + "," + Eval("IdCarrito") %>' />
                                         <asp:Label ID="lblCantidad" Text='<%# Eval("Cantidad") %>' runat="server" CssClass="qty" />
-                                        <asp:Button ID="btnMas" Text="+" runat="server" CssClass="btn btn-outline-dark" CommandName="Mas" CommandArgument='<%# Eval("IdArticulo") %>' />
+                                        <asp:Button ID="btnMas" Text="+" runat="server" CssClass="btn btn-outline-dark" CommandName="Mas" CommandArgument='<%# Eval("IdArticulo") + "," + Eval("IdCarrito") %>'/>
                                     </div>
                                 </div>
 
-                                <button class="btn btn-link text-danger">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
+                                <asp:LinkButton ID="btnEliminar" runat="server" CssClass="btn btn-link text-danger" htmlEncode="false" Text='<i class="fa-solid fa-trash"></i>' CommandName='Eliminar' CommandArgument='<%# Eval("Id") + "," + Eval("IdCarrito") %>' >
+                                </asp:LinkButton>
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
