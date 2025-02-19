@@ -13,8 +13,8 @@ namespace TPfinal_equipo_I
     {
         protected void Page_Load(object sender, EventArgs e)
         {ArticuloDB articulo = new ArticuloDB();
-            List<Articulo> lista = articulo.ListarArticulos();
-            GridView1.DataSource = lista;
+            Session.Add("listaArticulos",  articulo.ListarArticulos());
+            GridView1.DataSource = Session["listaArticulos"];
             GridView1.DataBind();
 
         }
@@ -23,6 +23,13 @@ namespace TPfinal_equipo_I
         {
           var id  =GridView1.SelectedDataKey.Value.ToString();
             Response.Redirect("Agregar.aspx?id=" + id);
+        }
+        protected void Filtro_TextChanged(object sender ,EventArgs e)
+        {
+            List<Articulo> lista = (List<Articulo>)Session["listaArticulos"];
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            GridView1.DataSource = listaFiltrada;
+            GridView1.DataBind();
         }
     }
 }

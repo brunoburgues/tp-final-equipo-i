@@ -11,9 +11,11 @@ using BaseDatos;
 namespace TPfinal_equipo_I
 {
     public partial class Agregar : System.Web.UI.Page
-    {
+    {public bool ConfirmaEliminacion { get; set; }  
         protected void Page_Load(object sender, EventArgs e)
-        { try
+        {
+            ConfirmaEliminacion = false;
+         try
             {
                 if (!IsPostBack)
                 {
@@ -35,22 +37,25 @@ namespace TPfinal_equipo_I
             
         if (Request.QueryString["id"] != null)
         {
-            try
-            {
-                int id = int.Parse(Request.QueryString["id"]);
+                try
+                {
+                    int id = int.Parse(Request.QueryString["id"]);
                     List<Articulo> articulos = (List<Articulo>)Session["Articulos"];
-                    Articulo articulo = articulos.Find(x => x.Id ==id);
-
-                txtNombre.Text = articulo.Nombre;
-                txtDescripcion.Text = articulo.Descripcion;
-                txtPrecio.Text = articulo.Precio.ToString();
-                listBoxCategorias.SelectedValue = articulo.Categoria.Id.ToString();
-                imgImagen.ImageUrl = articulo.Imagenes[0].Url;
-            }
-            catch (Exception ex)
-            {
-                Session.Add("Error", ex);
-            }
+                    Articulo articulo = articulos.Find(x => x.Id == id);
+                    if (articulo != null)
+                    {
+                        txtId.Text = articulo.Id.ToString();
+                        txtNombre.Text = articulo.Nombre;
+                        txtDescripcion.Text = articulo.Descripcion;
+                        txtPrecio.Text = articulo.Precio.ToString();
+                        listBoxCategorias.SelectedValue = articulo.Categoria.Id.ToString();
+                        imgImagen.ImageUrl = articulo.Imagenes[0].Url;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("Error", ex);
+                }
         }}
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -61,7 +66,7 @@ namespace TPfinal_equipo_I
 
                     Articulo articulo = new Articulo();
                     ArticuloDB articuloDB = new ArticuloDB();
-                    articulo.Codigo = txtCodigo.Text;
+                    
                     articulo.Nombre = txtNombre.Text;
                     articulo.Descripcion = txtDescripcion.Text;
                     articulo.Categoria = new Categoria();
@@ -83,6 +88,26 @@ namespace TPfinal_equipo_I
         {
             imgImagen.ImageUrl = txtImagenUrl.Text;
         }
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {if (chkConfirmarEliminar.Checked)
+                {
+                    ConfirmaEliminacion = true;
 
+                    if (Request.QueryString["id"] != null)
+                    {
+                        int id = int.Parse(Request.QueryString["id"]);
+                        ArticuloDB articuloDB = new ArticuloDB();
+                        articuloDB.eliminar(id);
+                        Response.Redirect("articulos.aspx", false);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+            }
+        }
     }
 }

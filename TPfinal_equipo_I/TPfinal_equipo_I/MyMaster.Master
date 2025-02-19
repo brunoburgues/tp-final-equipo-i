@@ -37,8 +37,10 @@
                                 <i class="fa-solid fa-box"></i>Productos
                             </a>
                             <a class="nav-link" href="Contacto.aspx">
-                                <i class="fa-solid fa-envelope"></i>Contacto
-                            </a>
+    <i class="fa-solid fa-envelope"></i>Contacto
+</a><a class="nav-link" href="articulos.aspx">
+    <i class="fa-solid fa-envelope"></i>Artículos
+</a>
                         </div>
                         <div class="navbar-nav ms-auto nav-icons-right">
                             <a class="nav-link nav-icons-right" href="LogIn.aspx">

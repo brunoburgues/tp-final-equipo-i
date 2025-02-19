@@ -2,9 +2,9 @@
 GO
 use master 
 go
-create database Ventas_Web_DB
+create database Ventas_Web_DB2
 go
-use Ventas_Web_DB
+use Ventas_Web_DB2
 go
 
 CREATE TABLE [dbo].[CATEGORIAS](
@@ -18,23 +18,13 @@ CREATE TABLE [dbo].[CATEGORIAS](
 GO
 
 
-CREATE TABLE [dbo].[MARCAS](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Descripcion] [varchar](50) NULL,
- CONSTRAINT [PK_MARCAS] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
 
 CREATE TABLE [dbo].[ARTICULOS](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Codigo] [varchar](50) NULL,
+	
 	[Nombre] [varchar](50) NULL,
 	[Descripcion] [varchar](150) NULL,
-	[IdMarca] [int] NULL,
+	
 	[IdCategoria] [int] NULL,
 	[Precio] [money] NULL,
 	[EnPromocion] bit NOT NULL DEFAULT 0,
@@ -52,12 +42,8 @@ GO
 ALTER TABLE [dbo].[ARTICULOS] CHECK CONSTRAINT [FK_ARTICULOS_CATEGORIAS]
 GO
 
-ALTER TABLE [dbo].[ARTICULOS]  WITH CHECK ADD  CONSTRAINT [FK_ARTICULOS_MARCAS] FOREIGN KEY([IdMarca])
-REFERENCES [dbo].[MARCAS] ([Id])
-GO
 
-ALTER TABLE [dbo].[ARTICULOS] CHECK CONSTRAINT [FK_ARTICULOS_MARCAS]
-GO
+
 
 CREATE TABLE [dbo].[IMAGENES](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -156,7 +142,7 @@ REFERENCES [dbo].[CARRITO] ([Id])
 GO
 ALTER TABLE [dbo].[PAGOS] CHECK CONSTRAINT [FK_PAGOS_CARRITO]
 GO
-insert into MARCAS values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Huawei'), ('Motorola')
+
 insert into CATEGORIAS values ('Mochilas'),('Perif�ricos'), ('Accesorios')
 insert into ARTICULOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un dise�o elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 49999, 0),
 ('P03', 'Mouse Gamer Hero G502', 'Sum�rgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 64999, 0),
