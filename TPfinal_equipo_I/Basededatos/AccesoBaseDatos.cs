@@ -19,7 +19,8 @@ namespace BaseDatos
 
         public AccesoBaseDatos() 
         {
-           conexion = new SqlConnection("server=.\\SQLEXPRESS; database=Ventas_Web_DB; integrated security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=Ventas_Web_DB; integrated security=true");
+
             comando = new SqlCommand();
         }
 

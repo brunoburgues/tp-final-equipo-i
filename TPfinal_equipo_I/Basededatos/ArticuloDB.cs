@@ -112,7 +112,11 @@ public void agregar(Articulo nuevo)
             AccesoBaseDatos datos = new AccesoBaseDatos();
             try
             {
+<<<<<<< HEAD
                 datos.SetConsulta("Insert into ARTICULOS values ( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
+=======
+                datos.SetConsulta("Insert into ARTICULOS values ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
+>>>>>>> 6639eaa14610f098d01bdde9e7d51d73a5370499
                 datos.ejecutarAccion();
             }
 
