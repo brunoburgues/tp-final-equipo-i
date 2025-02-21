@@ -35,5 +35,10 @@ namespace TPfinal_equipo_I
         {
 
         }
+
+        protected void txtBuscar_TextChanged(object sender)
+        {
+
+        }
     }
 }

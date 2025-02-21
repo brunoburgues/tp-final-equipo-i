@@ -13,13 +13,13 @@ namespace TPfinal_equipo_I
     public partial class Agregar : System.Web.UI.Page
     {public bool ConfirmaEliminacion { get; set; }  
         protected void Page_Load(object sender, EventArgs e)
-<<<<<<< HEAD
+ 
         {
             ConfirmaEliminacion = false;
          try
-=======
+
 { try
->>>>>>> 6639eaa14610f098d01bdde9e7d51d73a5370499
+
             {
                 if (!IsPostBack)
                 {
@@ -60,7 +60,7 @@ namespace TPfinal_equipo_I
                 {
                     Session.Add("Error", ex);
                 }
-        }}
+        }}}
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             try

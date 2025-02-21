@@ -2,9 +2,9 @@
 GO
 use master 
 go
-create database Ventas_Web_DB2
+create database Ventas_Web_DB
 go
-use Ventas_Web_DB2
+use Ventas_Web_DB
 go
 
 CREATE TABLE [dbo].[CATEGORIAS](
