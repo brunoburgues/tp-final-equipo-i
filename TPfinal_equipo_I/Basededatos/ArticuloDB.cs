@@ -10,9 +10,9 @@ using Dominio;
 
 namespace BaseDatos
 {
-    public class ArticuloDB 
+    public class ArticuloDB
     {
-        public List<Articulo> ListarArticulos(string id ="")
+        public List<Articulo> ListarArticulos(string id = "")
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoBaseDatos db = new AccesoBaseDatos();
@@ -21,16 +21,16 @@ namespace BaseDatos
                 db.SetConsulta("Select A.Id, Nombre, A.Descripcion, IdCategoria, C.Descripcion Categoria, Precio from ARTICULOS A  left join CATEGORIAS C on A.IdCategoria = C.Id  ");
                 db.Lectura();
                 //if (id != "")
-                   // db.CommandText += " AND A.id = '" + id + "'";
+                // db.CommandText += " AND A.id = '" + id + "'";
 
                 while (db.Reader.Read())
                 {
                     Articulo auxA = new Articulo();
                     auxA.Id = (int)db.Reader["Id"];
-                    
+
                     auxA.Nombre = (string)db.Reader["Nombre"];
                     auxA.Descripcion = (string)db.Reader["Descripcion"];
-                    
+
                     auxA.Categoria = new Categoria();
                     auxA.Categoria.Id = (int)db.Reader["IdCategoria"];
                     if (db.Reader["Categoria"] != DBNull.Value)
@@ -73,11 +73,11 @@ namespace BaseDatos
                 {
                     Articulo auxA = new Articulo();
                     auxA.Id = (int)db.Reader["Id"];
-                    
+
                     auxA.Nombre = (string)db.Reader["Nombre"];
                     auxA.Descripcion = (string)db.Reader["Descripcion"];
-                   
-                    
+
+
                     auxA.Categoria = new Categoria();
                     auxA.Categoria.Id = (int)db.Reader["IdCategoria"];
                     if (db.Reader["Categoria"] != DBNull.Value)
@@ -107,16 +107,16 @@ namespace BaseDatos
                 db.CloseConexion();
             }
         }
-public void agregar(Articulo nuevo)
+        public void agregar(Articulo nuevo)
         {
             AccesoBaseDatos datos = new AccesoBaseDatos();
             try
             {
-<<<<<<< HEAD
+
                 datos.SetConsulta("Insert into ARTICULOS values ( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
-=======
+
                 datos.SetConsulta("Insert into ARTICULOS values ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
->>>>>>> 6639eaa14610f098d01bdde9e7d51d73a5370499
+
                 datos.ejecutarAccion();
             }
 
@@ -145,7 +145,8 @@ public void agregar(Articulo nuevo)
             catch (Exception ex)
             {
                 throw ex;
-            }finally
+            }
+            finally
             {
                 datos.CloseConexion();
             }
@@ -165,10 +166,10 @@ public void agregar(Articulo nuevo)
                     ultimoArticulo = new Articulo
                     {
                         Id = (int)datos.Reader["Id"],
-                        
+
                         Nombre = (string)datos.Reader["Nombre"],
                         Descripcion = (string)datos.Reader["Descripcion"],
-                      
+
                         Categoria = new Categoria { Id = (int)datos.Reader["IdCategoria"] },
                         Precio = (decimal)datos.Reader["Precio"]
                     };
@@ -191,10 +192,10 @@ public void agregar(Articulo nuevo)
             try
             {
                 datos.SetConsulta("update ARTICULOS set  Nombre = @nombre, Descripcion = @descripcion, IdCategoria = @idCategoria, Precio = @precio where Id = @id");
-              
+
                 datos.setParametro("@nombre", articulo.Nombre);
                 datos.setParametro("@descripcion", articulo.Descripcion);
-               
+
                 datos.setParametro("@idCategoria", articulo.Categoria.Id);
                 datos.setParametro("@precio", articulo.Precio);
                 datos.setParametro("@id", articulo.Id);
@@ -207,7 +208,47 @@ public void agregar(Articulo nuevo)
             }
             finally { datos.CloseConexion(); }
         }
-
+        public List<Articulo> FiltrarArticulos(string campo, string criterio, string Filtrar)
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoBaseDatos db = new AccesoBaseDatos();
+            try
+            {
+                db.SetConsulta("Select A.Id, Nombre, A.Descripcion, IdCategoria, C.Descripcion Categoria, Precio from ARTICULOS A  left join CATEGORIAS C on A.IdCategoria = C.Id  ");
+                db.Lectura();
+                while (db.Reader.Read())
+                {
+                    Articulo auxA = new Articulo();
+                    auxA.Id = (int)db.Reader["Id"];
+                    auxA.Nombre = (string)db.Reader["Nombre"];
+                    auxA.Descripcion = (string)db.Reader["Descripcion"];
+                    auxA.Categoria = new Categoria();
+                    auxA.Categoria.Id = (int)db.Reader["IdCategoria"];
+                    if (db.Reader["Categoria"] != DBNull.Value)
+                    {
+                        auxA.Categoria.Descripcion = (string)db.Reader["Categoria"];
+                    }
+                    else
+                    {
+                        auxA.Categoria.Descripcion = "Sin asignar";
+                    }
+                    auxA.Precio = (decimal)db.Reader["Precio"];
+                    ImagenDB listaImagen = new ImagenDB();
+                    List<Imagen> listaImagenes = listaImagen.ListarImagenes(auxA.Id);
+                    auxA.Imagenes = listaImagenes;
+                    lista.Add(auxA);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                db.CloseConexion();
+            }
+        }
     }
 
 }

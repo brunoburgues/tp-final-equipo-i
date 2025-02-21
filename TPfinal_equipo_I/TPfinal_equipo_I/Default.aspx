@@ -6,11 +6,46 @@
 
     <div class="default-buscador d-flex justify-content-end ">
         <div class="d-flex mb-4" style="width: 530px" role="search">
-            <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2" aria-label="Search" />
-            <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CssClass="btn btn-success" />
+           <!-- <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2" aria-label="Search" AutoPostBack="true" OnTextChanged="txtBuscar_TextChanged" />-->
+            <asp:CheckBox ID="chkAdvanceFilter" runat="server" CssClass="=form-control" Text="Busqueda avanzada" OnCheckedChanged="chkAdvanceFilter_CheckedChanged" />
         </div>
     </div>
-
+    <%if (chkAdvanceFilter.Checked)
+        { %>
+    <div class="row">
+        <div class="col-3">
+            <div class="mb-3">
+                <asp:Label ID="Campo" runat="server" Text="Campo"></asp:Label>
+                <asp:DropDownList runat="server" CssClass="form-select" AutoPostBack="true" ID="ddlCampo" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged">
+                    <asp:ListItem Text="Nombre" Value="Nombre"></asp:ListItem>
+                    <asp:ListItem Text="Precio" Value="Precio"></asp:ListItem>
+                    <asp:ListItem Text="Categoria" Value="Categoria"></asp:ListItem>
+                </asp:DropDownList>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <asp:Label Text="Criterio" runat="server" />
+                <asp:DropDownList ID="ddlCriterio" runat="server" CssClass="form-select">
+                    <asp:ListItem Text="Igual" Value="Igual"></asp:ListItem>
+                    <asp:ListItem Text="Mayor" Value="Mayor"></asp:ListItem>
+                    <asp:ListItem Text="Menor" Value="Menor"></asp:ListItem>
+                </asp:DropDownList>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <asp:Label Text="Filtro" runat="server" />
+                <asp:TextBox ID="txtFiltroAvanzado" runat="server" CssClass="form-control" />
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
+            </div>
+        </div>
+    </div>
+    <%} %>
     <h2 class="titulo text-center">¡Ofertas de la Semana!</h2>
     <div class="container mb-4">
         <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 default-cards-container">
