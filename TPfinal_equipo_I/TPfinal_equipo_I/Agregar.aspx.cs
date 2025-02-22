@@ -11,56 +11,73 @@ using BaseDatos;
 namespace TPfinal_equipo_I
 {
     public partial class Agregar : System.Web.UI.Page
-    {public bool ConfirmaEliminacion { get; set; }  
-        protected void Page_Load(object sender, EventArgs e)
- 
+    {
+        public bool ConfirmaEliminacion { get; set; }
+        
+
+       protected void Page_Load(object sender, EventArgs e)
         {
-            ConfirmaEliminacion = false;
-         try
+            ConfirmaEliminacion = false; // Asegúrate de que esta variable esté declarada en la clase.
 
-{ try
-
+            if (!IsPostBack)
             {
-                if (!IsPostBack)
+                try
                 {
-
+                    // Cargar lista de categorías
                     CategoriaDB listaCategorias = new CategoriaDB();
                     List<Categoria> lista = listaCategorias.listarCategoria();
 
-
                     listBoxCategorias.DataSource = lista;
-                    listBoxCategorias.DataTextField = "Descripcion"; // Campo visible en el DropDownList
+                    listBoxCategorias.DataTextField = "Descripcion"; // Campo visible en el ListBox
                     listBoxCategorias.DataValueField = "Id";    // Campo que actúa como el valor
                     listBoxCategorias.DataBind();
+
+                    // Imagen por defecto
                     string urlImagen = "https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png";
                     imgImagen.ImageUrl = urlImagen;
-
                 }
-            }catch(Exception ex )
-            { Session.Add("Error", ex); }
-            
-        if (Request.QueryString["id"] != null)
-        {
+                catch (Exception ex)
+                {
+                    Session.Add("Error", ex);
+                }
+            }
+
+            // Cargar datos del artículo si se pasa un ID por la URL
+            if (Request.QueryString["id"] != null)
+            {
                 try
                 {
                     int id = int.Parse(Request.QueryString["id"]);
-                    List<Articulo> articulos = (List<Articulo>)Session["Articulos"];
-                    Articulo articulo = articulos.Find(x => x.Id == id);
-                    if (articulo != null)
+
+                    // Verificar si la sesión contiene artículos antes de acceder a ellos
+                    if (Session["Articulos"] != null)
                     {
-                        txtId.Text = articulo.Id.ToString();
-                        txtNombre.Text = articulo.Nombre;
-                        txtDescripcion.Text = articulo.Descripcion;
-                        txtPrecio.Text = articulo.Precio.ToString();
-                        listBoxCategorias.SelectedValue = articulo.Categoria.Id.ToString();
-                        imgImagen.ImageUrl = articulo.Imagenes[0].Url;
+                        List<Articulo> articulos = (List<Articulo>)Session["Articulos"];
+                        Articulo articulo = articulos.Find(x => x.Id == id);
+
+                        if (articulo != null)
+                        {
+                            txtId.Text = articulo.Id.ToString();
+                            txtNombre.Text = articulo.Nombre;
+                            txtDescripcion.Text = articulo.Descripcion;
+                            txtPrecio.Text = articulo.Precio.ToString();
+                            listBoxCategorias.SelectedValue = articulo.Categoria.Id.ToString();
+
+                            // Verificar si el artículo tiene imágenes antes de acceder a la primera
+                            if (articulo.Imagenes != null && articulo.Imagenes.Count > 0)
+                            {
+                                imgImagen.ImageUrl = articulo.Imagenes[0].Url;
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     Session.Add("Error", ex);
                 }
-        }}}
+            }
+        }
+
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             try
@@ -69,7 +86,7 @@ namespace TPfinal_equipo_I
                 {
                     Articulo articulo = new Articulo();
                     ArticuloDB articuloDB = new ArticuloDB();
-                    
+
                     articulo.Nombre = txtNombre.Text;
                     articulo.Descripcion = txtDescripcion.Text;
                     articulo.Categoria = new Categoria();
@@ -77,7 +94,7 @@ namespace TPfinal_equipo_I
                     articulo.Precio = int.Parse(txtPrecio.Text);
 
                     articuloDB.agregar(articulo);
-                    Response.Redirect("Default.aspx",false);
+                    Response.Redirect("Articulos.aspx", false);
 
                 }
             }
@@ -94,7 +111,8 @@ namespace TPfinal_equipo_I
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
             try
-            {if (chkConfirmarEliminar.Checked)
+            {
+                if (chkConfirmarEliminar.Checked)
                 {
                     ConfirmaEliminacion = true;
 

@@ -37,7 +37,7 @@
                             <a class="nav-link" href="default.aspx">
                                 <i class="fa-solid fa-box"></i>Productos
                             </a>
-                            <a class="nav-link" href="articulos.aspx">
+                            <a class="nav-link" href="Articulos.aspx">
                                 <i class="fa-solid fa-box"></i>Artículos
                             </a>
                             <a class="nav-link" href="Contacto.aspx">

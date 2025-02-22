@@ -113,9 +113,9 @@ namespace BaseDatos
             try
             {
 
-                datos.SetConsulta("Insert into ARTICULOS values ( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
+                datos.SetConsulta("Insert into ARTICULOS values ( '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
 
-                datos.SetConsulta("Insert into ARTICULOS values ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
+               // datos.SetConsulta("Insert into ARTICULOS values ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + ", " + nuevo.Categoria.Id + ", " + nuevo.Precio + ")");
 
                 datos.ejecutarAccion();
             }

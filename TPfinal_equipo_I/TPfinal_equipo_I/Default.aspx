@@ -6,7 +6,7 @@
 
     <div class="default-buscador d-flex justify-content-end ">
         <div class="d-flex mb-4" style="width: 530px" role="search">
-           <!-- <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2" aria-label="Search" AutoPostBack="true" OnTextChanged="txtBuscar_TextChanged" />-->
+            <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2" aria-label="Search" AutoPostBack="true" OnTextChanged="txtBuscar_TextChanged1" />
             <asp:CheckBox ID="chkAdvanceFilter" runat="server" CssClass="=form-control" Text="Busqueda avanzada" OnCheckedChanged="chkAdvanceFilter_CheckedChanged" />
         </div>
     </div>
@@ -54,7 +54,7 @@
                     <div class="card" style="width: 18rem; height: 25rem">
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="img-container">
-                                <img src='<%# Eval("Imagenes[0].Url") %>' class="card-img-top" alt="...">
+                                <img src='<%# ObtenerUrlImagen(Eval("Imagenes")) %>' class="card-img-top" alt="Imagen no disponible">
                             </div>
                         </div>
                         <div class="card-body">
@@ -75,7 +75,7 @@
                     <div class="card" style="width: 18rem; height: 25rem">
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="img-container">
-                                <img src='<%# Eval("Imagenes[0].Url") %>' class="card-img-top" alt="...">
+                                <img src='<%# ObtenerUrlImagen(Eval("Imagenes")) %>' class="card-img-top" alt="Imagen no disponible">
                             </div>
                         </div>
                         <div class="card-body">
@@ -96,7 +96,8 @@
                     <div class="card" style="width: 18rem; height: 25rem">
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="img-container">
-                                <img src='<%# Eval("Imagenes[0].Url") %>' class="card-img-top" alt="...">
+                                <img src='<%# ObtenerUrlImagen(Eval("Imagenes")) %>' class="card-img-top" alt="Imagen no disponible">
+                                
                             </div>
                         </div>
                         <div class="card-body">

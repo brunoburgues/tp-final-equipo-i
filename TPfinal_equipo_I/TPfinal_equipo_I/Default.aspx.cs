@@ -38,13 +38,7 @@ namespace TPfinal_equipo_I
 
         
 
-        protected void txtBuscar_TextChanged(object sender)
-        {
-            List<Articulo> lista = (List<Articulo>)Session["listaArticulos"];
-            List<Articulo> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()));
-            idRepeater.DataSource = listaFiltrada;
-            idRepeater.DataBind();
-        }
+        
 
         protected void chkAdvanceFilter_CheckedChanged(object sender, EventArgs e)
         {
@@ -83,5 +77,26 @@ namespace TPfinal_equipo_I
                 throw;
             }
         }
+
+        protected void txtBuscar_TextChanged1(object sender, EventArgs e)
+        {
+            List<Articulo> lista = (List<Articulo>)Session["listaArticulos"];
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()));
+            idRepeater.DataSource = listaFiltrada;
+            idRepeater.DataBind();
+        }
+        public string ObtenerUrlImagen(object imagenesObj)
+        {
+            List<Imagen> imagenes = imagenesObj as List<Imagen>;
+
+            if (imagenes != null && imagenes.Count > 0)
+            {
+                return imagenes[0].Url;
+            }
+
+            // URL de imagen por defecto si no hay imágenes disponibles
+            return "https://grupoact.com.ar/wp-content/uploads/2020/04/placeholder.png";
+        }
+
     }
 }

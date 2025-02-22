@@ -15,11 +15,11 @@ namespace TPfinal_equipo_I
     {
 
         /// <summary>
-<<<<<<< HEAD
+
         /// Control txtId.
-=======
+
         /// txtCodigo control.
->>>>>>> 6639eaa14610f098d01bdde9e7d51d73a5370499
+
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
