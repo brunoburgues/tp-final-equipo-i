@@ -43,17 +43,27 @@ namespace TPfinal_equipo_I
             }
 
             // Cargar datos del artículo si se pasa un ID por la URL
-            if (Request.QueryString["id"] != null)
+            if (Request.QueryString["Id"] != null)
             {
                 try
                 {
-                    int id = int.Parse(Request.QueryString["id"]);
+                    string idString = Request.QueryString["Id"];
+                    Response.Write("<script>console.log('ID recibido como string: " + idString + "');</script>");
+
+                    if (int.TryParse(idString, out int Id))
+                    {
+                        Response.Write("<script>console.log('ID convertido correctamente: " + Id + "');</script>");
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('Error: ID no válido. Valor recibido: " + idString + "');</script>");
+                    }
 
                     // Verificar si la sesión contiene artículos antes de acceder a ellos
                     if (Session["Articulos"] != null)
                     {
                         List<Articulo> articulos = (List<Articulo>)Session["Articulos"];
-                        Articulo articulo = articulos.Find(x => x.Id == id);
+                        Articulo articulo = articulos.Find(x => x.Id == Id);
 
                         if (articulo != null)
                         {
@@ -87,16 +97,36 @@ namespace TPfinal_equipo_I
                     Articulo articulo = new Articulo();
                     ArticuloDB articuloDB = new ArticuloDB();
 
-                    articulo.Nombre = txtNombre.Text;
-                    articulo.Descripcion = txtDescripcion.Text;
+                    articulo.Nombre = txtNombre.Text.Trim();
+                    articulo.Descripcion = txtDescripcion.Text.Trim();
+
+                    // Validar categoría seleccionada
+                    if (!int.TryParse(listBoxCategorias.SelectedValue, out int categoriaId))
+                    {
+                        Response.Write("<script>alert('Error: Categoría inválida.');</script>");
+                        return;
+                    }
+
                     articulo.Categoria = new Categoria();
-                    articulo.Categoria.Id = int.Parse(listBoxCategorias.SelectedValue);
-                    articulo.Precio = int.Parse(txtPrecio.Text);
+                    articulo.Categoria.Id = categoriaId;
+
+                    // Validar precio antes de convertirlo
+                    if (!decimal.TryParse(txtPrecio.Text, out decimal precio))
+                    {
+                        Response.Write("<script>alert('Error: El precio ingresado no es válido.');</script>");
+                        return;
+                    }
+
+                    articulo.Precio = precio;
 
                     articuloDB.agregar(articulo);
                     Response.Redirect("Articulos.aspx", false);
-
                 }
+                else
+                {
+                    Response.Write("<script>alert('Error: No has seleccionado una categoría.');</script>");
+                }
+
             }
             catch (Exception ex)
             {

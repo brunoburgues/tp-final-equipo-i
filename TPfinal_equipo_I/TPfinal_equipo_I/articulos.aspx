@@ -11,7 +11,7 @@
     
    </div> </div></div>
     <columns>
-    <asp:gridview id="GridView1" runat="server" onSelectedIndexChanged="GridView1_SelectedIndexChanged" autogeneratecolumns="False" datakeynames="id"  cssClass=" table table-success table-striped table-responsive" width="100%">
+    <asp:gridview id="GridView1" runat="server" onSelectedIndexChanged="GridView1_SelectedIndexChanged" autogeneratecolumns="False" datakeynames="Id"  cssClass=" table table-success table-striped table-responsive" width="100%">
         <Columns>
             <asp:Boundfield datafield="nombre" headertext="nombre" sortexpression="nombre" />
             <asp:Boundfield datafield="precio" headertext="precio" sortexpression="precio" />
