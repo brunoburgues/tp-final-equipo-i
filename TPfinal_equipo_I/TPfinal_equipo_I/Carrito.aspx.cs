@@ -12,6 +12,19 @@ namespace TPfinal_equipo_I
     public partial class Compra : System.Web.UI.Page
     {
         //métodos
+        private void ActualizarMontoTotalEInterfaz(CarritoDB carritoDB, int idCarrito)
+        {
+            List<Carrito> carrito = carritoDB.ListarArticulos(idCarrito);
+            decimal total = calcularMontoTotal(carrito);
+            montoTotal.Text = $"{formatoPrecio(total)}";
+            carritoDB.actualizarMontoTotal(idCarrito, total);
+            cargarArticulos(carritoDB, idCarrito);
+        }
+        public string formatoPrecio(decimal precio)
+        {
+            var culture = new System.Globalization.CultureInfo("es-AR");
+            return precio.ToString("#,##0", culture);
+        }
         private void cargarArticulos(CarritoDB carritoDB, int idCarrito)
         {
             List<Carrito> carrito = carritoDB.ListarArticulos(idCarrito);
@@ -32,15 +45,15 @@ namespace TPfinal_equipo_I
         {
             if (!IsPostBack)
             {
-
+                //OBTENER EL IDCARRITO CORRESPONDIENTE DE CADA USUARIO
                 int idCarrito = 1;
                 CarritoDB carritoDB = new CarritoDB();
                 List<Carrito> carrito = carritoDB.ListarArticulos(idCarrito);
-                montoTotal.Text = $"{calcularMontoTotal(carrito)}";
-                
+                decimal total = calcularMontoTotal(carrito);
+                montoTotal.Text = $"{formatoPrecio(total)}";
 
-                repArticulos.DataSource = carrito;
-                repArticulos.DataBind();
+
+                cargarArticulos(carritoDB, idCarrito);
             }
         }
         //comprar
@@ -62,42 +75,59 @@ namespace TPfinal_equipo_I
         protected void repArticulos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             CarritoDB carritoDB = new CarritoDB();
-
-            if (e.CommandName == "Eliminar")
-            {
-                string[] listaArgumentos = e.CommandArgument.ToString().Split(',');
-                int id = Convert.ToInt32(listaArgumentos[0]);
-                int idC = Convert.ToInt32(listaArgumentos[1]);
-
-                carritoDB.eliminarArticulo(id);
-                cargarArticulos(carritoDB, idC);
-                return;
-            }
-
             string[] argumentos = e.CommandArgument.ToString().Split(',');
             int idArticulo = Convert.ToInt32(argumentos[0]);
             int idCarrito = Convert.ToInt32(argumentos[1]);
 
-            Label lblCantidad = (Label)e.Item.FindControl("lblCantidad");
-
-            if (lblCantidad != null)
+            if (e.CommandName == "Eliminar")
             {
-                int cantidad = int.Parse(lblCantidad.Text);
-
-                if (e.CommandName == "Menos" && cantidad > 1)
-                {
-                    cantidad--;
-                }
-                else if (e.CommandName == "Mas")
-                {
-                    cantidad++;
-                }
-                lblCantidad.Text = Convert.ToString(cantidad);
-                carritoDB.actualizarCantidad(idCarrito, idArticulo, cantidad);
+                carritoDB.eliminarArticulo(idArticulo);
             }
-            cargarArticulos(carritoDB, idCarrito);
+            else
+            {
+                Label lblCantidad = (Label)e.Item.FindControl("lblCantidad");
+
+                if (lblCantidad != null)
+                {
+                    int cantidad = int.Parse(lblCantidad.Text);
+
+                    if (e.CommandName == "Menos" && cantidad > 1)
+                    {
+                        cantidad--;
+                    }
+                    else if (e.CommandName == "Mas")
+                    {
+                        cantidad++;
+                    }
+
+                    lblCantidad.Text = cantidad.ToString();
+                    carritoDB.actualizarCantidad(idCarrito, idArticulo, cantidad);
+                }
+            }
+
+            ActualizarMontoTotalEInterfaz(carritoDB, idCarrito);
         }
 
+        protected void repArticulos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Label lblCantidad = (Label)e.Item.FindControl("lblCantidad");
+                if (lblCantidad != null)
+                {
+                    int cantidad = int.Parse(lblCantidad.Text);
+
+                    Button btnMenos = (Button)e.Item.FindControl("btnMenos");
+                    Button btnMas = (Button)e.Item.FindControl("btnMas");
+                    if (btnMenos != null && btnMas != null)
+                    {
+                        btnMenos.Enabled = (cantidad > 1);
+                        //Traer el stock y verificar que no lo superé
+                        btnMas.Enabled = (cantidad < 3);
+                    }
+                }
+            }
+        }
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
         }
@@ -108,5 +138,7 @@ namespace TPfinal_equipo_I
             CarritoDB carritoDB = new CarritoDB();
             carritoDB.eliminarCarrito(idCarrito);
         }
+
+        
     }
 }

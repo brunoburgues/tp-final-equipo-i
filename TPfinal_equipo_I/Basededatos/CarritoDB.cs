@@ -64,7 +64,24 @@ namespace Basededatos
             }
             finally { datos.CloseConexion(); }
         }
+        public void actualizarMontoTotal(int idCarrito, decimal total)
+        {
+            AccesoBaseDatos datos = new AccesoBaseDatos();
+            try
+            {
+                datos.SetConsulta("UPDATE CARRITO SET CostoTotal = @total WHERE Id = @idCarrito;");
+                datos.setParametro("@idCarrito", idCarrito);
+                datos.setParametro("@total", total);
 
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally { datos.CloseConexion(); }
+        }
         public void eliminarArticulo(int id)
         {
             AccesoBaseDatos datos = new AccesoBaseDatos();
