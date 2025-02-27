@@ -18,23 +18,13 @@ CREATE TABLE [dbo].[CATEGORIAS](
 GO
 
 
-CREATE TABLE [dbo].[MARCAS](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Descripcion] [varchar](50) NULL,
- CONSTRAINT [PK_MARCAS] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
 
 CREATE TABLE [dbo].[ARTICULOS](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Codigo] [varchar](50) NULL,
+	
 	[Nombre] [varchar](50) NULL,
 	[Descripcion] [varchar](150) NULL,
-	[IdMarca] [int] NULL,
+	
 	[IdCategoria] [int] NULL,
 	[Precio] [money] NULL,
 	[EnPromocion] bit NOT NULL DEFAULT 0,
@@ -52,12 +42,8 @@ GO
 ALTER TABLE [dbo].[ARTICULOS] CHECK CONSTRAINT [FK_ARTICULOS_CATEGORIAS]
 GO
 
-ALTER TABLE [dbo].[ARTICULOS]  WITH CHECK ADD  CONSTRAINT [FK_ARTICULOS_MARCAS] FOREIGN KEY([IdMarca])
-REFERENCES [dbo].[MARCAS] ([Id])
-GO
 
-ALTER TABLE [dbo].[ARTICULOS] CHECK CONSTRAINT [FK_ARTICULOS_MARCAS]
-GO
+
 
 CREATE TABLE [dbo].[IMAGENES](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -158,11 +144,19 @@ REFERENCES [dbo].[CARRITO] ([Id])
 GO
 ALTER TABLE [dbo].[PAGOS] CHECK CONSTRAINT [FK_PAGOS_CARRITO]
 GO
+<<<<<<< HEAD
+
+insert into CATEGORIAS values ('Mochilas'),('Perif�ricos'), ('Accesorios')
+insert into ARTICULOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un dise�o elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 49999, 0),
+('P03', 'Mouse Gamer Hero G502', 'Sum�rgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 64999, 0),
+('P08', 'Teclado Mec�nico 75% Rk M75', 'Este teclado cuenta con un dise�o compacto con 81 teclas, por lo que es f�cil de transportar y usar en cualquier lugar.', 2, 3, 185000, 0)
+=======
 insert into MARCAS values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Huawei'), ('Motorola')
 insert into CATEGORIAS values ('Mochilas'),('Perifericos'), ('Accesorios')
 insert into ARTICULOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 49999, 0),
 ('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 64999, 0),
 ('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 185000, 0)
+>>>>>>> 6639eaa14610f098d01bdde9e7d51d73a5370499
 
 insert into imagenes values
 (1,'https://http2.mlstatic.com/D_NQ_NP_703368-MLU76300898146_052024-O.webp'),

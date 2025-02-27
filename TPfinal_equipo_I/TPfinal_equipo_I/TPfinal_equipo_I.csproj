@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Agregar.aspx" />
+    <Content Include="Articulos.aspx" />
     <Content Include="Assets\Estilos\estilo.css" />
     <Content Include="Carrito.aspx" />
     <Content Include="Contacto.aspx" />
@@ -86,6 +87,13 @@
     </Compile>
     <Compile Include="Agregar.aspx.designer.cs">
       <DependentUpon>Agregar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Articulos.aspx.cs">
+      <DependentUpon>Articulos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Articulos.aspx.designer.cs">
+      <DependentUpon>Articulos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Carrito.aspx.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
