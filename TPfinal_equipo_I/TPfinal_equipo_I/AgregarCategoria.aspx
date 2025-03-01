@@ -15,4 +15,14 @@
     </div>
     <div>  <asp:Button ID="btnAceptar" CssClass="btn btn-outline-success" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" class="btn btn-success mt-4" />
         <a href="Categorias.aspx" class="btn btn-outline-warning">Cancelar</a></div>
+        <asp:Button ID="Eliminar" CssClass="btn btn-outline-danger" runat="server" Text="Eliminar" OnClick="Eliminar_Click" class="btn btn-danger mt-4" />
+            <%if (ConfirmaEliminacion){ %>
+    <div class="alert alert-danger" role="alert">
+        ¿Está seguro que desea eliminar el artículo?
+        <asp:CheckBox ID="chkConfirmarEliminar"  runat="server" />
+        <asp:Button ID="btnConfirmarEliminar" runat="server" Text="Confirmar" CssClass="btn btn-danger" OnClick="btnEliminar_Click" />
+        <asp:Button ID="btnCancelarEliminar" runat="server" Text="Cancelar" CssClass="btn btn-outline-danger"  />
+</div>
+    <%} %>
+    
 </asp:Content>

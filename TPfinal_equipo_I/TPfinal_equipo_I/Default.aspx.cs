@@ -16,7 +16,7 @@ namespace TPfinal_equipo_I
             Session.Add("listaArticulos", articuloFiltro.ListarArticulos());
             idRepeater.DataSource = Session["listaArticulos"];
             idRepeater.DataBind();
-                FiltroAvanzado = chkAdvanceFilter.Checked;
+                FiltroAvanzado = true;
 
             if (!IsPostBack)
             {

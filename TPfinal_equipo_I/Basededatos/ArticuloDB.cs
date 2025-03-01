@@ -18,50 +18,36 @@ namespace BaseDatos
             AccesoBaseDatos db = new AccesoBaseDatos();
             try
             {
-                if (!string.IsNullOrEmpty(id))
-                {
-                    db.SetConsulta("SELECT A.Id, Nombre, A.Descripcion, IdCategoria, C.Descripcion AS Categoria, Precio " +
-                                   "FROM ARTICULOS A LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id " +
-                                   "WHERE A.Id = @id");
-
-                    db.SetParametro("@id", int.Parse(id));
-                }
-                else
-                {
-                    db.SetConsulta("SELECT A.Id, Nombre, A.Descripcion, IdCategoria, C.Descripcion AS Categoria, Precio " +
-                                   "FROM ARTICULOS A LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id");
-                }
-
-
+                db.SetConsulta("Select A.Id, Nombre, A.Descripcion, IdCategoria, C.Descripcion Categoria, Precio from ARTICULOS A  left join CATEGORIAS C on A.IdCategoria = C.Id  ");
                 db.Lectura();
-
-                if (db.Reader == null)
-                {
-                    throw new Exception("El lector de base de datos (Reader) es null. Verifica la consulta SQL.");
-                }
+                //if (id != "")
+                // db.CommandText += " AND A.id = '" + id + "'";
 
                 while (db.Reader.Read())
                 {
                     Articulo auxA = new Articulo();
                     auxA.Id = (int)db.Reader["Id"];
+
                     auxA.Nombre = (string)db.Reader["Nombre"];
                     auxA.Descripcion = (string)db.Reader["Descripcion"];
 
-                    auxA.Categoria = new Categoria();  // ¡SE INICIALIZA AQUÍ!
-
-                    object idCategoriaObj = db.Reader["IdCategoria"];
-                    auxA.Categoria.Id = idCategoriaObj != DBNull.Value ? (int)idCategoriaObj : 0;
-                    auxA.Categoria.Descripcion = db.Reader["Categoria"] != DBNull.Value ? (string)db.Reader["Categoria"] : "Sin asignar";
-
+                    auxA.Categoria = new Categoria();
+                    auxA.Categoria.Id = (int)db.Reader["IdCategoria"];
+                    if (db.Reader["Categoria"] != DBNull.Value)
+                    {
+                        auxA.Categoria.Descripcion = (string)db.Reader["Categoria"];
+                    }
+                    else
+                    {
+                        auxA.Categoria.Descripcion = "Sin asignar";
+                    }
                     auxA.Precio = (decimal)db.Reader["Precio"];
-
-                    // Cargar imágenes
                     ImagenDB listaImagen = new ImagenDB();
-                    auxA.Imagenes = listaImagen.ListarImagenes(auxA.Id);
+                    List<Imagen> listaImagenes = listaImagen.ListarImagenes(auxA.Id);
+                    auxA.Imagenes = listaImagenes;
 
                     lista.Add(auxA);
                 }
-
                 return lista;
             }
             catch (Exception ex)

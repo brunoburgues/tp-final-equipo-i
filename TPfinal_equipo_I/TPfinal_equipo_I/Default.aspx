@@ -10,7 +10,7 @@
             <asp:CheckBox ID="chkAdvanceFilter" runat="server" CssClass="=form-control" Text="Busqueda avanzada" OnCheckedChanged="chkAdvanceFilter_CheckedChanged" />
         </div>
     </div>
-    <%if (chkAdvanceFilter.Checked)
+    <%if (FiltroAvanzado)
         { %>
     <div class="row">
         <div class="col-3">

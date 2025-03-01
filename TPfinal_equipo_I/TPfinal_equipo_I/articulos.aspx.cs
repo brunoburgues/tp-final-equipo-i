@@ -14,6 +14,11 @@ namespace TPfinal_equipo_I
         protected void Page_Load(object sender, EventArgs e)
 
         {
+            if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).tipoUsuario == Dominio.TipoUsuario.Admin))
+            {
+                Session.Add("error", "No tiene permiso aquí.");
+                Response.Redirect("LogIn.aspx", false);
+            }
             if (!IsPostBack)
             {
                 

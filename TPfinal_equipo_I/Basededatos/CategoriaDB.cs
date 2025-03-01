@@ -14,35 +14,28 @@ namespace BaseDatos
         public List<Categoria> listarCategoria()
         {
             List<Categoria> listaCategorias = new List<Categoria>();
-            AccesoBaseDatos datos = new AccesoBaseDatos(); // Sin using
+            AccesoBaseDatos datos = new AccesoBaseDatos();
 
             try
             {
-                datos.SetConsulta("SELECT Id, Descripcion FROM CATEGORIAS");
+                datos.SetConsulta("select Id, Descripcion from CATEGORIAS");
                 datos.Lectura();
-
                 while (datos.Reader.Read())
                 {
-                    Categoria c = new Categoria
-                    {
-                        Id = datos.Reader.GetInt32(0),
-                        Descripcion = datos.Reader.IsDBNull(1) ? "Sin descripción" : datos.Reader.GetString(1)
-                    };
+                    Categoria c = new Categoria();
+                    c.Id = (int)datos.Reader["Id"];
+                    c.Descripcion = (string)datos.Reader["Descripcion"];
                     listaCategorias.Add(c);
                 }
+                return listaCategorias;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error en listarCategoria(): " + ex.Message, ex);
-            }
-            finally
-            {
-                datos.CloseConexion(); // Cierra la conexión manualmente
-            }
 
-            return listaCategorias;
+                throw ex;
+            }
+            finally { datos.CloseConexion(); }
         }
-
         public List<Categoria> listarCategoria(string ID)
         {
             List<Categoria> listaCategorias = new List<Categoria>();
@@ -50,75 +43,44 @@ namespace BaseDatos
 
             try
             {
-                string consulta = "SELECT Id, Descripcion FROM CATEGORIAS";
-
-                if (!string.IsNullOrEmpty(ID))
-                {
-                    consulta += " WHERE Id = @Id";
-                }
-
-                datos.SetConsulta(consulta);
-
-                if (!string.IsNullOrEmpty(ID))
-                {
-                    if (int.TryParse(ID, out int idNumerico))
-                    {
-                        datos.SetParametro("@Id", idNumerico);
-                    }
-                    else
-                    {
-                        throw new Exception("El ID proporcionado no es un número válido.");
-                    }
-                }
-
+                datos.SetConsulta("select Id, Descripcion from CATEGORIAS");
                 datos.Lectura();
-
                 while (datos.Reader.Read())
                 {
-                    Categoria c = new Categoria
-                    {
-                        Id = (int)datos.Reader["Id"],
-                        Descripcion = (string)datos.Reader["Descripcion"]
-                    };
+                    Categoria c = new Categoria();
+                    c.Id = (int)datos.Reader["Id"];
+                    c.Descripcion = (string)datos.Reader["Descripcion"];
                     listaCategorias.Add(c);
                 }
-
                 return listaCategorias;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error en listarCategoria(): " + ex.Message);
+
+                throw ex;
+            }
+            finally { datos.CloseConexion(); }
+        }
+        public void agregar(string nombre)
+        {
+            AccesoBaseDatos datos = new AccesoBaseDatos();
+            try
+            {
+                datos.SetConsulta("Insert into Categorias (descripcion) values ('" + nombre + "' )");
+                datos.Lectura();
+            }
+
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
             finally
             {
+
                 datos.CloseConexion();
             }
         }
-
-
-        public void agregar(Categoria categoria)
-        {
-            try
-            {
-                using (SqlConnection conexion = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=Ventas_Web_DB1;Integrated Security=True;"))
-
-                {
-                    conexion.Open();
-                    string query = "INSERT INTO Categorias (Descripcion) VALUES (@Descripcion)";
-
-                    using (SqlCommand comando = new SqlCommand(query, conexion))
-                    {
-                        comando.Parameters.AddWithValue("@Descripcion", categoria.Descripcion);
-                        comando.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error en agregar(): " + ex.Message);
-            }
-        }
-
         public void editar(Categoria categoria, string nombre)
         {
             AccesoBaseDatos accesoBaseDatos = new AccesoBaseDatos();

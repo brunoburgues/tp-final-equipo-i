@@ -34,15 +34,17 @@
                             <a class="nav-link" href="Categorias.aspx">
                                 <i class="fa-solid fa-tags"></i>Categorías
                             </a>
-                            <a class="nav-link" href="default.aspx">
-                                <i class="fa-solid fa-box"></i>Productos
-                            </a>
                             <a class="nav-link" href="Articulos.aspx">
                                 <i class="fa-solid fa-box"></i>Artículos
+                            </a>
+                            <a class="nav-link" href="default.aspx">
+                                <i class="fa-solid fa-box"></i>Productos
                             </a>
                             <a class="nav-link" href="Contacto.aspx">
                                 <i class="fa-solid fa-envelope"></i>Contacto
                             </a>
+                          
+
                         </div>
                         <div class="navbar-nav ms-auto nav-icons-right">
                             <a class="nav-link nav-icons-right" href="LogIn.aspx">

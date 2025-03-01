@@ -19,8 +19,7 @@ namespace BaseDatos
 
         public AccesoBaseDatos() 
         {
-            conexion = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=Ventas_Web_DB1;Integrated Security=True;");
-
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=Ventas_Web_DB1; integrated security=true");
 
             comando = new SqlCommand();
         }
@@ -85,14 +84,5 @@ namespace BaseDatos
         {
             throw new NotImplementedException();
         }
-       
-
-        public void SetParametro(string nombre, object valor)
-        {
-            comando.Parameters.AddWithValue(nombre, valor);
-        }
-
-        
-
     }
 }

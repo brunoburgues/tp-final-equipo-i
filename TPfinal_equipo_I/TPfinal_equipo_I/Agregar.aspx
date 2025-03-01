@@ -35,6 +35,7 @@
         </div>
         <div class="mb-3">
             <asp:Button ID="btnAceptar" CssClass="btn btn-outline-success" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" class="btn btn-success mt-4" />
+            <asp:button ID="btnEditar" class="btn btn-outline-primary" runat="server" Text="Editar" OnClick="btnEditar_Click" />
             <a href="Default.aspx" class="btn btn-outline-warning">Cancelar</a>
         </div>
     </div>
@@ -44,6 +45,7 @@
                 <ContentTemplate>
                     <div class="mb-3">
                         <asp:Button Text="Eliminar" ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-outline-danger" runat="server" />
+                        
                     </div>
                     <%if (ConfirmaEliminacion){ %>
                     <div class="alert alert-danger" role="alert">
