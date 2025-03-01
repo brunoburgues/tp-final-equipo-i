@@ -1,23 +1,44 @@
-﻿USE [Ventas_Web_DB]
+﻿USE master;
 GO
+
+IF DB_ID('Ventas_Web_DB') IS NOT NULL
+BEGIN
+	ALTER DATABASE Ventas_Web_DB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE Ventas_Web_DB;
+END
+GO
+
+CREATE DATABASE Ventas_Web_DB;
+GO
+
+USE Ventas_Web_DB;
+GO
+<<<<<<< HEAD
 use master 
 go
 create database Ventas_Web_DB1
 go
 use Ventas_Web_DB1
 go
+=======
+>>>>>>> 717de6780b353fad164d5b5b439bb75076ad8258
 
 CREATE TABLE [dbo].[CATEGORIAS](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Descripcion] [varchar](50) NULL,
- CONSTRAINT [PK_CATEGORIAS] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+    [Descripcion] [varchar](50) NULL,
+    CONSTRAINT [PK_CATEGORIAS] PRIMARY KEY CLUSTERED 
+    (
+        [Id] ASC
+    ) WITH (
+        PAD_INDEX = OFF, 
+        STATISTICS_NORECOMPUTE = OFF, 
+        IGNORE_DUP_KEY = OFF, 
+        ALLOW_ROW_LOCKS = ON, 
+        ALLOW_PAGE_LOCKS = ON, 
+        OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF
+    ) ON [PRIMARY]
+) ON [PRIMARY];
 GO
-
-
 
 CREATE TABLE [dbo].[ARTICULOS](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -118,10 +139,6 @@ CREATE TABLE [dbo].[CARRITO_PRODUCTOS](
 )) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[CARRITO_PRODUCTOS] ADD CONSTRAINT [FK_CARRITO_PRODUCTOS_CARRITO] FOREIGN KEY([IdCarrito])
-REFERENCES [dbo].[CARRITO] ([Id])
-GO
-
 ALTER TABLE [dbo].[CARRITO_PRODUCTOS] 
 ADD CONSTRAINT [FK_CARRITO_PRODUCTOS_CARRITO] FOREIGN KEY([IdCarrito])
 REFERENCES [dbo].[CARRITO] ([Id]) 
@@ -144,6 +161,7 @@ REFERENCES [dbo].[CARRITO] ([Id])
 GO
 ALTER TABLE [dbo].[PAGOS] CHECK CONSTRAINT [FK_PAGOS_CARRITO]
 GO
+<<<<<<< HEAD
 
 
 insert into CATEGORIAS values ('Mochilas'),('Perif�ricos'), ('Accesorios')
@@ -157,6 +175,13 @@ insert into ARTICULOS values ( 'Mochila Porta Notebook', 'Esta mochila combina u
 ( 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 64999),
 ( 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 185000)
 
+=======
+
+insert into CATEGORIAS values ('Mochilas'),('Perifericos'), ('Accesorios')
+insert into ARTICULOS values ('Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 49999, 0),
+('Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 64999, 0),
+('Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 3, 185000, 0)
+>>>>>>> 717de6780b353fad164d5b5b439bb75076ad8258
 
 insert into imagenes values
 (1,'https://http2.mlstatic.com/D_NQ_NP_703368-MLU76300898146_052024-O.webp'),
